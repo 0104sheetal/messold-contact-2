@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact MESSOLD — Premium Shopify Development & Growth Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CORE DESIGN ENGINE & VARIABLES --- */
+        :root {
+            --bg-charcoal-primary: #18181B;
+            --bg-charcoal-secondary: #1F1F1F;
+            --bg-charcoal-surface: #242424;
+            --bg-light-primary: #FAFAFA;
+            --bg-light-card: #FFFFFF;
+            
+            --text-dark-primary: #111111;
+            --text-dark-secondary: #666666;
+            --text-light-primary: #FAFAFA;
+            --text-light-secondary: #A1A1AA;
+            
+            --border-light: #E7E7E7;
+            --border-dark: #2E2E33;
+            --border-accent: #3F3F46;
+            
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-premium: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.2s ease;
+        }
+
+        /* --- STRUCTURAL BASE RESETS --- */
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-charcoal-primary);
+            color: var(--text-light-primary);
+            overflow-x: hidden;
+        }
+
+        /* --- GLOBAL REUSABLE UI ELEMENTS --- */
+        .ms-section-spacing-dark {
+            padding: 120px 0;
+            background-color: var(--bg-charcoal-primary);
+            color: var(--text-light-primary);
+        }
+
+        .ms-section-spacing-light {
+            padding: 120px 0;
+            background-color: var(--bg-light-primary);
+            color: var(--text-dark-primary);
+        }
+
+        .ms-container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .ms-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: var(--transition-premium);
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .ms-btn-primary-light {
+            background-color: var(--bg-light-primary);
+            color: var(--text-dark-primary);
+            border: 1px solid transparent;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .ms-btn-primary-light:hover {
+            transform: translateY(-2px);
+            background-color: transparent;
+            color: var(--text-light-primary);
+            border-color: var(--border-accent);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+        }
+
+        .ms-btn-secondary-dark {
+            background-color: transparent;
+            color: var(--text-light-secondary);
+            border: 1px solid var(--border-dark);
+        }
+
+        .ms-btn-secondary-dark:hover {
+            transform: translateY(-2px);
+            color: var(--text-light-primary);
+            border-color: var(--border-accent);
+        }
+
+        .ms-btn-primary-dark {
+            background-color: var(--bg-charcoal-primary);
+            color: var(--text-light-primary);
+            border: 1px solid transparent;
+        }
+
+        .ms-btn-primary-dark:hover {
+            transform: translateY(-2px);
+            background-color: transparent;
+            color: var(--text-dark-primary);
+            border-color: var(--border-light);
+        }
+
+        /* --- UTILITY HUD NAVIGATION --- */
+        .ms-hud-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(24, 24, 27, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-dark);
+            transition: var(--transition-premium);
+        }
+
+        .ms-hud-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .ms-hud-logo {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-light-primary);
+        }
+
+        .ms-hud-cta {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-light-primary);
+            border: 1px solid var(--border-dark);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: var(--transition-fast);
+        }
+
+        .ms-hud-cta:hover {
+            border-color: var(--border-accent);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-nav-mode .ms-hud-nav {
+            background: rgba(250, 250, 250, 0.75);
+            border-bottom: 1px solid var(--border-light);
+        }
+        body.light-nav-mode .ms-hud-logo { color: var(--text-dark-primary); }
+        body.light-nav-mode .ms-hud-cta {
+            color: var(--text-dark-primary);
+            border-color: var(--border-light);
+        }
+        body.light-nav-mode .ms-hud-cta:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        /* --- REFINED ASYMMETRICAL EDITORIAL HERO --- */
+        .ms-hero-refined {
+            position: relative;
+            padding: 160px 0 140px 0;
+            border-bottom: 1px solid var(--border-dark);
+            background-color: var(--bg-charcoal-primary);
+            background-image: 
+                radial-gradient(circle at 75% 40%, rgba(36, 36, 36, 0.7) 0%, transparent 60%),
+                linear-gradient(rgba(46, 46, 51, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(46, 46, 51, 0.15) 1px, transparent 1px);
+            background-size: 100% 100%, 48px 48px, 48px 48px;
+            overflow: hidden;
+        }
+
+        .ms-hero-asymmetric-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Hero Left Content Stagger */
+        .ms-hero-editorial-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .ms-hero-label-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: var(--text-light-secondary);
+            text-transform: uppercase;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: heroFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.1s;
+        }
+
+        .ms-hero-refined h1 {
+            font-size: clamp(2.8rem, 5vw, 4.4rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+            margin: 0;
+            color: var(--text-light-primary);
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroFadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .ms-hero-dynamic-word-wrap {
+            display: inline-block;
+            color: var(--text-light-secondary);
+            position: relative;
+        }
+
+        .ms-hero-cursor-line {
+            display: inline-block;
+            width: 3px;
+            height: clamp(2.4rem, 4.5vw, 4rem);
+            background-color: var(--text-light-primary);
+            margin-left: 6px;
+            animation: blinkState 0.8s infinite steps(2);
+            vertical-align: middle;
+        }
+
+        .ms-hero-editorial-stack p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--text-light-secondary);
+            max-width: 500px;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroFadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        .ms-hero-interactive-action-block {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroFadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .ms-hero-trust-statement {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8125rem;
+            color: var(--text-light-secondary);
+            padding-left: 4px;
+        }
+
+        .ms-hero-trust-statement svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: var(--text-light-secondary);
+            stroke-width: 2;
+        }
+
+        /* Hero Right Structured Collage */
+        .ms-hero-curated-collage {
+            position: relative;
+            height: 480px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.98) translateY(10px);
+            animation: heroCollageReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .ms-collage-curated-node {
+            position: absolute;
+            background-color: var(--bg-charcoal-secondary);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            padding: 22px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-premium);
+        }
+
+        .ms-collage-curated-node:hover {
+            transform: scale(1.03) translateY(-8px) !important;
+            border-color: var(--border-accent);
+            box-shadow: 0 35px 60px -10px rgba(0, 0, 0, 0.7);
+            z-index: 20 !important;
+        }
+
+        .ms-collage-curated-node.node-storefront {
+            width: 270px;
+            top: 10px;
+            left: -10px;
+            transform: rotate(-2.5deg);
+            z-index: 4;
+            animation: curatedFloatAlpha 9s ease-in-out infinite alternate;
+        }
+
+        .ms-collage-curated-node.node-creative {
+            width: 190px;
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(3deg);
+            z-index: 2;
+            animation: curatedFloatBeta 8s ease-in-out infinite alternate;
+        }
+
+        .ms-collage-curated-node.node-performance {
+            width: 210px;
+            bottom: 60px;
+            right: -20px;
+            transform: rotate(-1.5deg);
+            z-index: 5;
+            animation: curatedFloatAlpha 7.5s ease-in-out infinite alternate-reverse;
+        }
+
+        .ms-collage-curated-node.node-strategy {
+            width: 230px;
+            top: 40px;
+            right: 0px;
+            transform: rotate(2deg);
+            z-index: 1;
+            animation: curatedFloatBeta 10s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes heroFadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heroCollageReveal {
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes curatedFloatAlpha {
+            0% { transform: translateY(0) rotate(-2deg); }
+            100% { transform: translateY(-12px) rotate(0.5deg); }
+        }
+
+        @keyframes curatedFloatBeta {
+            0% { transform: translateY(0) rotate(2deg); }
+            100% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        /* Collage Asset Internals */
+        .ms-curated-preview-render {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #2A2A30 0%, #1A1A1E 100%);
+            border-radius: 6px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-light-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .ms-curated-preview-render.render-creative-bg {
+            background: linear-gradient(45deg, #222226 0%, #2E2E35 100%);
+            height: 140px;
+        }
+
+        .ms-card-curated-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin: 0 0 4px 0;
+            color: var(--text-light-primary);
+        }
+
+        .ms-card-curated-sub {
+            font-size: 0.75rem;
+            color: var(--text-light-secondary);
+            margin: 0;
+        }
+
+        /* --- THE EDITORIAL CONTACT CORE SECTION --- */
+        .ms-contact-split-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .ms-contact-left-editorial {
+            position: sticky;
+            top: 110px;
+        }
+
+        .ms-contact-left-editorial h3 {
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light-secondary);
+            margin: 0 0 16px 0;
+        }
+
+        .ms-contact-left-editorial p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light-secondary);
+            margin: 0 0 40px 0;
+        }
+
+        .ms-editorial-directory {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .ms-directory-row {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ms-directory-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #52525B;
+            margin-bottom: 4px;
+        }
+
+        .ms-directory-value {
+            font-size: 0.9375rem;
+            color: var(--text-light-primary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .ms-directory-value:hover {
+            color: var(--text-light-secondary);
+        }
+
+        .ms-directory-social-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .ms-directory-social-cluster a {
+            font-size: 0.875rem;
+            color: var(--text-light-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 2px;
+            transition: var(--transition-fast);
+        }
+
+        .ms-directory-social-cluster a:hover {
+            color: var(--text-light-secondary);
+            border-color: var(--border-accent);
+        }
+
+        .ms-editorial-divider {
+            height: 1px;
+            background-color: var(--border-dark);
+            margin: 40px 0;
+        }
+
+        .ms-editorial-careers-cta h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .ms-editorial-careers-cta p {
+            font-size: 0.875rem;
+            color: var(--text-light-secondary);
+            margin: 0 0 16px 0;
+        }
+
+        .ms-link-action {
+            font-size: 0.875rem;
+            color: var(--text-light-primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition-fast);
+        }
+
+        .ms-link-action:hover {
+            gap: 8px;
+            color: var(--text-light-secondary);
+        }
+
+        /* Right Column Form Architecture */
+        .ms-bespoke-form-wrap {
+            background-color: var(--bg-charcoal-secondary);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .ms-form-block-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 32px 0;
+            letter-spacing: -0.01em;
+        }
+
+        .ms-form-grid-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .ms-form-span-full {
+            grid-column: span 2;
+        }
+
+        .ms-interactive-input-group {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ms-interactive-input-group input {
+            width: 100%;
+            background-color: var(--bg-charcoal-surface);
+            border: 1px solid var(--border-dark);
+            border-radius: 6px;
+            padding: 16px;
+            font-family: var(--font-family);
+            font-size: 0.9375rem;
+            color: var(--text-light-primary);
+            outline: none;
+            box-sizing: border-box;
+            transition: var(--transition-fast);
+        }
+
+        /* Floating Behavior Realization */
+        .ms-interactive-input-group label {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            font-size: 0.9375rem;
+            color: var(--text-light-secondary);
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ms-interactive-input-group input::placeholder {
+            color: #52525B;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .ms-interactive-input-group input:focus::placeholder {
+            opacity: 1;
+        }
+
+        .ms-interactive-input-group input:focus,
+        .ms-interactive-input-group input:not(:placeholder-shown) {
+            border-color: var(--border-accent);
+            padding-top: 22px;
+            padding-bottom: 10px;
+        }
+
+        .ms-interactive-input-group input:focus + label,
+        .ms-interactive-input-group input:not(:placeholder-shown) + label {
+            top: 6px;
+            left: 16px;
+            font-size: 0.75rem;
+            color: var(--text-light-secondary);
+        }
+
+        /* Segmented Service Selector Buttons */
+        .ms-segmented-container {
+            margin-bottom: 40px;
+        }
+
+        .ms-segmented-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--text-light-primary);
+        }
+
+        .ms-segmented-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .ms-segment-btn {
+            background-color: var(--bg-charcoal-surface);
+            border: 1px solid var(--border-dark);
+            color: var(--text-light-secondary);
+            padding: 14px;
+            border-radius: 6px;
+            font-family: var(--font-family);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: var(--transition-fast);
+        }
+
+        .ms-segment-btn:hover {
+            border-color: var(--border-accent);
+            color: var(--text-light-primary);
+        }
+
+        .ms-segment-btn.active-state {
+            background-color: var(--bg-light-primary);
+            color: var(--text-dark-primary);
+            border-color: transparent;
+        }
+
+        /* Dynamic Engine Container Pipeline */
+        .ms-dynamic-pipeline-inject {
+            border-top: 1px solid var(--border-dark);
+            padding-top: 32px;
+            margin-bottom: 32px;
+            display: none;
+        }
+
+        .ms-dynamic-pipeline-inject.active-visible {
+            display: block;
+            animation: formRevealSmooth 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes formRevealSmooth {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ms-submit-execution-panel .ms-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        /* --- CLIENT SUCCESS CAROUSEL SECTION (LIGHT) --- */
+        .ms-carousel-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 48px;
+        }
+
+        .ms-carousel-header-block h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 0;
+        }
+
+        .ms-carousel-nav-arrows {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ms-arrow-trigger {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-light);
+            background-color: var(--bg-light-card);
+            color: var(--text-dark-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .ms-arrow-trigger:hover {
+            background-color: var(--text-dark-primary);
+            color: var(--bg-light-primary);
+            border-color: transparent;
+        }
+
+        .ms-carousel-viewport-mask {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .ms-carousel-scroll-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ms-video-card-node {
+            min-width: calc((100% - 48px) / 3);
+            max-width: calc((100% - 48px) / 3);
+            background-color: var(--bg-light-card);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 16px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .ms-video-thumbnail-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background-color: #E4E4E7;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .ms-video-thumbnail-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-premium);
+        }
+
+        .ms-video-card-node:hover .ms-video-thumbnail-container video {
+            transform: scale(1.04);
+        }
+
+        .ms-video-playback-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ms-play-svg-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: var(--transition-fast);
+        }
+
+        .ms-video-card-node:hover .ms-play-svg-icon {
+            transform: scale(1.1);
+        }
+
+        .ms-card-client-bio {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ms-card-client-name {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-dark-primary);
+        }
+
+        .ms-card-client-brand {
+            font-size: 0.8125rem;
+            color: var(--text-dark-secondary);
+        }
+
+        .ms-card-quote-content {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #4B5563;
+            margin: 0;
+        }
+
+        /* --- THE EDITORIAL CONVERSATIONAL PROCESS SECTION (DARK) --- */
+        .ms-process-title-row {
+            margin-bottom: 64px;
+        }
+
+        .ms-process-title-row h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 0;
+        }
+
+        .ms-process-editorial-pipeline {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ms-process-step-row {
+            display: grid;
+            grid-template-columns: 0.4fr 1.1fr 1.5fr;
+            padding: 32px 0;
+            align-items: baseline;
+        }
+
+        .ms-process-num {
+            font-size: 1.125rem;
+            font-weight: 400;
+            color: var(--text-light-secondary);
+        }
+
+        .ms-process-label {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-light-primary);
+            margin: 0;
+        }
+
+        .ms-process-desc {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: var(--text-light-secondary);
+            margin: 0;
+        }
+
+        .ms-process-line-divider {
+            height: 1px;
+            background-color: var(--border-dark);
+            width: 100%;
+        }
+
+        /* --- INFINITE BRAND MARQUEE (LIGHT) --- */
+        .ms-marquee-section {
+            padding: 60px 0;
+            background-color: var(--bg-light-primary);
+            border-bottom: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .ms-marquee-viewport-mask {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .ms-marquee-viewport-mask::before,
+        .ms-marquee-viewport-mask::after {
+            content: "";
+            position: absolute;
+            top: 0; width: 100px; height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .ms-marquee-viewport-mask::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-light-primary), transparent);
+        }
+
+        .ms-marquee-viewport-mask::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-light-primary), transparent);
+        }
+
+        .ms-marquee-track-rail {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            white-space: nowrap;
+            animation: infiniteMarqueeScroll 30s linear infinite;
+        }
+
+        .ms-marquee-track-rail:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes infiniteMarqueeScroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        .ms-marquee-logo-node {
+            font-size: 1.125rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #71717A;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        /* --- ACCORDION FAQ SECTION (DARK) --- */
+        .ms-faq-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            text-align: center;
+            margin: 0 0 48px 0;
+        }
+
+        .ms-faq-accordion-pipeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ms-faq-row-node {
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .ms-faq-row-trigger {
+            width: 100%;
+            padding: 24px 0;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--font-family);
+            font-size: 1.0625rem;
+            font-weight: 500;
+            color: var(--text-light-primary);
+            outline: none;
+        }
+
+        .ms-faq-icon-marker {
+            font-size: 1.25rem;
+            color: var(--text-light-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .ms-faq-row-node.expanded-active .ms-faq-icon-marker {
+            transform: rotate(45deg);
+        }
+
+        .ms-faq-content-drawer {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+
+        .ms-faq-content-drawer p {
+            padding-bottom: 24px;
+            color: var(--text-light-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- HIGHLY REFINED ASYMMETRICAL SPLIT FINAL CTA --- */
+        .ms-cta-refined-section {
+            padding: 60px 0 100px 0;
+            background-color: var(--bg-light-primary);
+        }
+
+        .ms-cta-curated-container {
+            background-color: var(--bg-charcoal-primary);
+            border: 1px solid var(--border-dark);
+            border-radius: 24px;
+            padding: 80px 60px;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
+        }
+
+        .ms-cta-asymmetric-split {
+            display: grid;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .ms-cta-left-narrative h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin: 0 0 24px 0;
+            color: var(--text-light-primary);
+        }
+
+        .ms-cta-left-narrative p {
+            font-size: 1.0625rem;
+            color: var(--text-light-secondary);
+            line-height: 1.6;
+            margin: 0;
+            max-width: 480px;
+        }
+
+        .ms-cta-right-info-panel {
+            background-color: var(--bg-charcoal-secondary);
+            border: 1px solid var(--border-dark);
+            border-radius: 14px;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.02);
+        }
+
+        .ms-panel-action-row {
+            border-bottom: 1px solid var(--border-dark);
+            padding-bottom: 24px;
+            width: 100%;
+        }
+
+        .ms-panel-action-row .ms-btn {
+            width: 100%;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .ms-panel-directory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .ms-panel-directory-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.875rem;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+            padding-bottom: 12px;
+        }
+
+        .ms-panel-directory-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .ms-panel-item-label {
+            color: var(--text-light-secondary);
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ms-panel-item-value {
+            color: var(--text-light-primary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .ms-panel-item-value.link-interactive::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; width: 0; height: 1px;
+            background-color: var(--text-light-primary);
+            transition: var(--transition-fast);
+        }
+
+        .ms-panel-item-value.link-interactive:hover {
+            color: #FFFFFF;
+        }
+
+        .ms-panel-item-value.link-interactive:hover::after {
+            width: 100%;
+        }
+
+        .ms-panel-item-value.value-static {
+            color: var(--text-light-secondary);
+            font-weight: 400;
+        }
+
+        .ms-clipboard-toast-layer {
+            font-size: 0.75rem;
+            color: #10B981;
+            margin-left: 6px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            position: absolute;
+            right: 0;
+            top: -16px;
+        }
+
+        /* --- PREMIUM MONOCHROME FOOTER --- */
+        .ms-footer {
+            padding: 60px 0 30px 0;
+            background-color: var(--bg-charcoal-primary);
+            border-top: 1px solid var(--border-dark);
+            color: var(--text-light-secondary);
+            font-size: 0.8125rem;
+        }
+
+        .ms-footer-base-legal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ms-footer-social-cluster {
+            display: flex;
+            gap: 24px;
+        }
+
+        .ms-footer-social-cluster a {
+            color: var(--text-light-secondary);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .ms-footer-social-cluster a:hover {
+            color: var(--text-light-primary);
+        }
+
+        /* --- THE CINEMA LIGHTBOX --- */
+        .ms-cinema-lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(24, 24, 27, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ms-cinema-lightbox.lightbox-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ms-lightbox-window {
+            width: 90%;
+            max-width: 960px;
+            aspect-ratio: 16/9;
+            background: #000000;
+            border-radius: 8px;
+            overflow: hidden;
+            transform: scale(0.96);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ms-cinema-lightbox.lightbox-visible .ms-lightbox-window {
+            transform: scale(1);
+        }
+
+        .ms-lightbox-close-trigger {
+            position: absolute;
+            top: 24px; right: 24px;
+            background: none;
+            border: none;
+            color: var(--text-light-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition-fast);
+            outline: none;
+        }
+
+        .ms-lightbox-close-trigger:hover {
+            opacity: 1;
+        }
+
+        /* --- PLATFORM BREAKPOINT RESPONSIVENESS --- */
+        @media (max-width: 1024px) {
+            .ms-container { padding: 0 32px; }
+            .ms-hero-asymmetric-grid { grid-template-columns: 1fr; gap: 60px; }
+            .ms-hero-curated-collage { display: none; } /* Focus pure typography on smaller tablets */
+            .ms-contact-split-grid { grid-template-columns: 1fr; gap: 64px; }
+            .ms-contact-left-editorial { position: relative; top: 0; }
+            .ms-video-card-node {
+                min-width: calc((100% - 24px) / 2);
+                max-width: calc((100% - 24px) / 2);
+            }
+            .ms-process-step-row { grid-template-columns: 0.3fr 1fr; gap: 16px; }
+            .ms-process-desc { grid-column: span 2; margin-top: 8px; }
+            .ms-cta-curated-container { padding: 60px 40px; }
+            .ms-cta-asymmetric-split { grid-template-columns: 1fr; gap: 48px; }
+        }
+
+        @media (max-width: 768px) {
+            .ms-container { padding: 0 24px; }
+            .ms-form-grid-matrix { grid-template-columns: 1fr; }
+            .ms-form-span-full { grid-column: span 1; }
+            .ms-segmented-matrix { grid-template-columns: 1fr; }
+            .ms-video-card-node {
+                min-width: 100%;
+                max-width: 100%;
+            }
+            .ms-carousel-header-block { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .ms-process-step-row { display: flex; flex-direction: column; gap: 8px; }
+            .ms-cta-curated-container { padding: 40px 24px; border-radius: 16px; }
+            .ms-cta-right-info-panel { padding: 24px; }
+            .ms-footer-base-legal { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="ms-hud-nav">
+        <div class="ms-hud-container">
+            <a href="#" class="ms-hud-logo">Messold</a>
+            <a href="#editorialFormAnchor" class="ms-hud-cta">Get in Touch</a>
+        </div>
+    </nav>
+
+    <header class="ms-hero-refined">
+        <div class="ms-container">
+            <div class="ms-hero-asymmetric-grid">
+                
+                <div class="ms-hero-editorial-stack">
+                    <span class="ms-hero-label-tag">Contact Messold</span>
+                    <h1>
+                        Let's <span class="ms-hero-dynamic-word-wrap" id="msHeroTypewriterNode">Build</span><span class="ms-hero-cursor-line"></span><br>Something Better.
+                    </h1>
+                    <p>We partner with high-growth brands to build high-performance Shopify storefronts and predictable customer acquisition models.</p>
+                    <div class="ms-hero-interactive-action-block">
+                        <a href="#editorialFormAnchor" class="ms-btn ms-btn-primary-light">Book Discovery Call</a>
+                        <div class="ms-hero-trust-statement">
+                            <svg viewBox="0 0 16 16"><path d="M13.3334 4L6.00007 11.3333L2.66675 8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Usually replies within one business day</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ms-hero-curated-collage">
+                    <div class="ms-collage-curated-node node-storefront">
+                        <div class="ms-curated-preview-render">Storefront Preview</div>
+                        <h4 class="ms-card-curated-title">Shopify Architecture</h4>
+                        <p class="ms-card-curated-sub">Headless Production Engine</p>
+                    </div>
+                    
+                    <div class="ms-collage-curated-node node-creative">
+                        <div class="ms-curated-preview-render render-creative-bg">Creative Asset</div>
+                        <h4 class="ms-card-curated-title">Marketing Asset</h4>
+                        <p class="ms-card-curated-sub">High Intent Optimization</p>
+                    </div>
+
+                    <div class="ms-collage-curated-node node-performance">
+                        <h4 class="ms-card-curated-title">Metrics Dashboard</h4>
+                        <div class="ms-analytics-grid" style="margin-top: 10px;">
+                            <div>
+                                <span class="ms-card-curated-sub">ROAS</span>
+                                <div class="ms-analytics-metric" style="font-size: 1.15rem;">4.82&times;</div>
+                            </div>
+                            <div>
+                                <span class="ms-card-curated-sub">YTD Growth</span>
+                                <div class="ms-analytics-change">+12%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ms-collage-curated-node node-strategy">
+                        <h4 class="ms-card-curated-title">Strategic Roadmap</h4>
+                        <ul class="ms-planning-list" style="margin-top: 10px;">
+                            <li class="ms-planning-item" style="font-size: 0.75rem;">Shopify CRO Audit</li>
+                            <li class="ms-planning-item" style="font-size: 0.75rem;">Scale Architecture</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="ms-section-spacing-dark" id="editorialFormAnchor">
+        <div class="ms-container">
+            <div class="ms-contact-split-grid">
+                
+                <div class="ms-contact-left-editorial">
+                    <h3>Partnership Openings</h3>
+                    <p>We work exclusively with ambitious commerce teams looking to build robust digital architecture and scale customer validation loops.</p>
+                    
+                    <div class="ms-editorial-directory">
+                        <div class="ms-directory-row">
+                            <span class="ms-directory-label">Direct Communication</span>
+                            <a href="mailto:hello@messold.com" class="ms-directory-value">hello@messold.com</a>
+                        </div>
+                        <div class="ms-directory-row">
+                            <span class="ms-directory-label">Direct Inquiries Hotline</span>
+                            <span class="ms-directory-value">+91 98765 43210</span>
+                        </div>
+                        <div class="ms-directory-row">
+                            <span class="ms-directory-label">Office Hours</span>
+                            <span class="ms-directory-value">09:00 – 18:00 IST / Mon – Fri</span>
+                        </div>
+                    </div>
+
+                    <div class="ms-directory-social-cluster">
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">WhatsApp</a>
+                    </div>
+
+                    <div class="ms-editorial-divider"></div>
+
+                    <div class="ms-editorial-careers-cta">
+                        <h4>Looking for Careers?</h4>
+                        <p>We are always looking for exceptional software engineers and tactical performance media buyers.</p>
+                        <a href="#" class="ms-link-action">View Careers &rarr;</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="ms-bespoke-form-wrap">
+                        <h3 class="ms-form-block-title">Project Discovery Matrix</h3>
+                        
+                        <form id="msBespokeInteractionForm" novalidate>
+                            
+                            <div class="ms-form-grid-matrix">
+                                <div class="ms-interactive-input-group">
+                                    <input type="text" id="fieldName" required placeholder="Enter your full name">
+                                    <label for="fieldName">Full Name *</label>
+                                </div>
+                                <div class="ms-interactive-input-group">
+                                    <input type="email" id="fieldEmail" required placeholder="name@example.com">
+                                    <label for="fieldEmail">Email Address *</label>
+                                </div>
+                                <div class="ms-interactive-input-group">
+                                    <input type="tel" id="fieldPhone" required placeholder="+91 XXXXX XXXXX">
+                                    <label for="fieldPhone">Phone Number *</label>
+                                </div>
+                                <div class="ms-interactive-input-group">
+                                    <input type="text" id="fieldCompany" placeholder="Your Brand Name">
+                                    <label for="fieldCompany">Company Name</label>
+                                </div>
+                                <div class="ms-interactive-input-group ms-form-span-full">
+                                    <input type="url" id="fieldWebsite" placeholder="https://yourwebsite.com">
+                                    <label for="fieldWebsite">Current Storefront Link</label>
+                                </div>
+                            </div>
+
+                            <div class="ms-segmented-container">
+                                <div class="ms-segmented-label">Select Core Growth Mandate *</div>
+                                <div class="ms-segmented-matrix" id="msSegmentSelectionRack">
+                                    <button type="button" class="ms-segment-btn" data-service-key="webDev">Website Development</button>
+                                    <button type="button" class="ms-segment-btn" data-service-key="perfMarketing">Performance Marketing</button>
+                                    <button type="button" class="ms-segment-btn" data-service-key="socialMedia">Social Media Management</button>
+                                    <button type="button" class="ms-segment-btn" data-service-key="growthPartner">Complete Growth Partner</button>
+                                </div>
+                            </div>
+
+                            <div class="ms-dynamic-pipeline-inject" id="msDynamicInjectionNode">
+                                <div class="ms-form-grid-matrix" id="msDynamicInteriorGrid">
+                                    </div>
+                            </div>
+
+                            <div class="ms-submit-execution-panel">
+                                <button type="submit" class="ms-btn ms-btn-primary-light" id="msSubmitButtonText">Book Discovery Call</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="ms-section-spacing-light">
+        <div class="ms-container">
+            
+            <div class="ms-carousel-header-block">
+                <h2>Validated Client Operations</h2>
+                <div class="ms-carousel-nav-arrows">
+                    <button class="ms-arrow-trigger" id="msCarouselTriggerLeft" aria-label="Slide Left">&larr;</button>
+                    <button class="ms-arrow-trigger" id="msCarouselTriggerRight" aria-label="Slide Right">&rarr;</button>
+                </div>
+            </div>
+
+            <div class="ms-carousel-viewport-mask">
+                <div class="ms-carousel-scroll-track" id="msCarouselMovingPipeline">
+                    
+                    <div class="ms-video-card-node">
+                        <div class="ms-video-thumbnail-container" data-video-uri="https://www.w3schools.com/html/mov_bbb.mp4">
+                            <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted loop playsinline></video>
+                            <div class="ms-video-playback-overlay">
+                                <div class="ms-play-svg-icon">
+                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M13 8L1 15V1L13 8Z" fill="#111111" stroke="#111111" stroke-width="2" stroke-linejoin="round"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-card-client-bio">
+                            <span class="ms-card-client-name">Julian R.</span>
+                            <span class="ms-card-client-brand">Growth Director, Aura Labs</span>
+                        </div>
+                        <p class="ms-card-quote-content">"The infrastructural architectural rebuild executed by Messold reduced our store checkout abandonment metrics by 34%."</p>
+                    </div>
+
+                    <div class="ms-video-card-node">
+                        <div class="ms-video-thumbnail-container" data-video-uri="https://www.w3schools.com/html/movie.mp4">
+                            <video src="https://www.w3schools.com/html/movie.mp4" muted loop playsinline></video>
+                            <div class="ms-video-playback-overlay">
+                                <div class="ms-play-svg-icon">
+                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M13 8L1 15V1L13 8Z" fill="#111111" stroke="#111111" stroke-width="2" stroke-linejoin="round"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-card-client-bio">
+                            <span class="ms-card-client-name">Elena K.</span>
+                            <span class="ms-card-client-brand">Founder, Velo Custom</span>
+                        </div>
+                        <p class="ms-card-quote-content">"Their approach toward Server-Side data architectures allowed our performance loops to track media margins scaling over 4x seamlessly."</p>
+                    </div>
+
+                    <div class="ms-video-card-node">
+                        <div class="ms-video-thumbnail-container" data-video-uri="https://www.w3schools.com/html/mov_bbb.mp4">
+                            <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted loop playsinline></video>
+                            <div class="ms-video-playback-overlay">
+                                <div class="ms-play-svg-icon">
+                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M13 8L1 15V1L13 8Z" fill="#111111" stroke="#111111" stroke-width="2" stroke-linejoin="round"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-card-client-bio">
+                            <span class="ms-card-client-name">Marcus S.</span>
+                            <span class="ms-card-client-brand">VP Commerce, Hydro Pack</span>
+                        </div>
+                        <p class="ms-card-quote-content">"Clean code pipelines, structural timeline predictability, and zero fluff. They operate as a high-tier extension of our core product."</p>
+                    </div>
+
+                    <div class="ms-video-card-node">
+                        <div class="ms-video-thumbnail-container" data-video-uri="https://www.w3schools.com/html/movie.mp4">
+                            <video src="https://www.w3schools.com/html/movie.mp4" muted loop playsinline></video>
+                            <div class="ms-video-playback-overlay">
+                                <div class="ms-play-svg-icon">
+                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M13 8L1 15V1L13 8Z" fill="#111111" stroke="#111111" stroke-width="2" stroke-linejoin="round"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-card-client-bio">
+                            <span class="ms-card-client-name">Tasha L.</span>
+                            <span class="ms-card-client-brand">CMO, Silk Botanicals</span>
+                        </div>
+                        <p class="ms-card-quote-content">"Messold managed our cross-functional multi-region launch perfectly. Total architectural execution safety."</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="ms-section-spacing-dark">
+        <div class="ms-container">
+            
+            <div class="ms-process-title-row">
+                <h2>Our Synchronization Protocol</h2>
+            </div>
+
+            <div class="ms-process-editorial-pipeline">
+                
+                <div class="ms-process-line-divider"></div>
+                <div class="ms-process-step-row">
+                    <span class="ms-process-num">01</span>
+                    <h3 class="ms-process-label">Operational Intake</h3>
+                    <p class="ms-process-desc">Submit your functional framework specifications, constraints, and revenue bottlenecks through our digital discovery interface layer.</p>
+                </div>
+
+                <div class="ms-process-line-divider"></div>
+                <div class="ms-process-step-row">
+                    <span class="ms-process-num">02</span>
+                    <h3 class="ms-process-label">Discovery Session</h3>
+                    <p class="ms-process-desc">A deep, focused data-synchronization session aligning core code components, platform dependencies, and media allocation parameters.</p>
+                </div>
+
+                <div class="ms-process-line-divider"></div>
+                <div class="ms-process-step-row">
+                    <span class="ms-process-num">03</span>
+                    <h3 class="ms-process-label">Strategic Blueprint</h3>
+                    <p class="ms-process-desc">We compile explicit scope requirements, execution sprint milestones, and concrete fixed-pricing metrics with clear parameters.</p>
+                </div>
+
+                <div class="ms-process-line-divider"></div>
+                <div class="ms-process-step-row">
+                    <span class="ms-process-num">04</span>
+                    <h3 class="ms-process-label">Sprint Kickoff</h3>
+                    <p class="ms-process-desc">Production environment initializations begin immediately inside clear staging frameworks with clean communication loops.</p>
+                </div>
+                <div class="ms-process-line-divider"></div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="ms-marquee-section">
+        <div class="ms-marquee-viewport-mask">
+            <div class="ms-marquee-track-rail">
+                <span class="ms-marquee-logo-node">Noise</span>
+                <span class="ms-marquee-logo-node">Leaf</span>
+                <span class="ms-marquee-logo-node">Craftsmith</span>
+                <span class="ms-marquee-logo-node">Power Sutra</span>
+                <span class="ms-marquee-logo-node">Silk Berry</span>
+                <span class="ms-marquee-logo-node">Mango</span>
+                <span class="ms-marquee-logo-node">Oats Studio</span>
+                <span class="ms-marquee-logo-node">Kind Soul</span>
+                <span class="ms-marquee-logo-node">Amara Herbs</span>
+                <span class="ms-marquee-logo-node">Fraternity & Co.</span>
+                <span class="ms-marquee-logo-node">Weaving Cult</span>
+                <span class="ms-marquee-logo-node">Harries</span>
+                <span class="ms-marquee-logo-node">Noise</span>
+                <span class="ms-marquee-logo-node">Leaf</span>
+                <span class="ms-marquee-logo-node">Craftsmith</span>
+                <span class="ms-marquee-logo-node">Power Sutra</span>
+                <span class="ms-marquee-logo-node">Silk Berry</span>
+                <span class="ms-marquee-logo-node">Mango</span>
+                <span class="ms-marquee-logo-node">Oats Studio</span>
+                <span class="ms-marquee-logo-node">Kind Soul</span>
+                <span class="ms-marquee-logo-node">Amara Herbs</span>
+                <span class="ms-marquee-logo-node">Fraternity & Co.</span>
+                <span class="ms-marquee-logo-node">Weaving Cult</span>
+                <span class="ms-marquee-logo-node">Harries</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="ms-section-spacing-dark ms-faq-section">
+        <div class="ms-container">
+            <h2>Frequently Answered Frameworks</h2>
+            
+            <div class="ms-faq-accordion-pipeline">
+                
+                <div class="ms-faq-row-node">
+                    <button class="ms-faq-row-trigger" type="button">
+                        <span>How quickly will someone contact me?</span>
+                        <span class="ms-faq-icon-marker">+</span>
+                    </button>
+                    <div class="ms-faq-content-drawer">
+                        <p>Our operational architecture leads evaluate inbound discovery forms within 12 business hours to coordinate direct scheduling.</p>
+                    </div>
+                </div>
+
+                <div class="ms-faq-row-node">
+                    <button class="ms-faq-row-trigger" type="button">
+                        <span>Can I book a call before deciding?</span>
+                        <span class="ms-faq-icon-marker">+</span>
+                    </button>
+                    <div class="ms-faq-content-drawer">
+                        <p>Yes. The initialization framework call functions completely as a clean strategic synchronization session without immediate commercial obligations.</p>
+                    </div>
+                </div>
+
+                <div class="ms-faq-row-node">
+                    <button class="ms-faq-row-trigger" type="button">
+                        <span>Do you work internationally?</span>
+                        <span class="ms-faq-icon-marker">+</span>
+                    </button>
+                    <div class="ms-faq-content-drawer">
+                        <p>Globally. We orchestrate infrastructure setups and deployment layers for brands operating across North America, Europe, APAC, and cross-border regions.</p>
+                    </div>
+                </div>
+
+                <div class="ms-faq-row-node">
+                    <button class="ms-faq-row-trigger" type="button">
+                        <span>Can I request only one service?</span>
+                        <span class="ms-faq-icon-marker">+</span>
+                    </button>
+                    <div class="ms-faq-content-drawer">
+                        <p>Absolutely. You can leverage our engineering team solely for complex infrastructure builds, or assign performance media channels independently.</p>
+                    </div>
+                </div>
+
+                <div class="ms-faq-row-node">
+                    <button class="ms-faq-row-trigger" type="button">
+                        <span>How long does development usually take?</span>
+                        <span class="ms-faq-icon-marker">+</span>
+                    </button>
+                    <div class="ms-faq-content-drawer">
+                        <p>Custom infrastructure builds typically track within 6 to 12-week sprint windows depending upon system complexity layers.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="ms-cta-refined-section">
+        <div class="ms-container">
+            <div class="ms-cta-curated-container">
+                <div class="ms-cta-asymmetric-split">
+                    
+                    <div class="ms-cta-left-narrative">
+                        <h2>Ready to Start Something Meaningful?</h2>
+                        <p>Tell us about your goals. We'll recommend the right architectural layout or marketing solution, not the most expensive one.</p>
+                    </div>
+
+                    <div class="ms-cta-right-info-panel">
+                        <div class="ms-panel-action-row">
+                            <a href="#editorialFormAnchor" class="ms-btn ms-btn-primary-light">Book Discovery Call</a>
+                        </div>
+                        
+                        <div class="ms-panel-directory-list">
+                            <div class="ms-panel-directory-item">
+                                <span class="ms-panel-item-label">Direct Inbox</span>
+                                <span class="ms-panel-item-value link-interactive" id="msPanelEmailAction">
+                                    hello@messold.com
+                                    <span class="ms-clipboard-toast-layer" id="msClipboardToast">Copied</span>
+                                </span>
+                            </div>
+                            <div class="ms-panel-directory-item">
+                                <span class="ms-panel-item-label">Hotline</span>
+                                <a href="tel:+919876543210" class="ms-panel-item-value link-interactive">+91 98765 43210</a>
+                            </div>
+                            <div class="ms-panel-directory-item">
+                                <span class="ms-panel-item-label">Response Velocity</span>
+                                <span class="ms-panel-item-value value-static">&lt; 24 Business Hours</span>
+                            </div>
+                            <div class="ms-panel-directory-item">
+                                <span class="ms-panel-item-label">Working Hours</span>
+                                <span class="ms-panel-item-value value-static">09:00 – 18:00 IST</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ms-footer">
+        <div class="ms-container">
+            <div class="ms-footer-base-legal">
+                <span>&copy; 2026 MESSOLD Architecture. All rights reserved globally.</span>
+                <div class="ms-footer-social-cluster">
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="ms-cinema-lightbox" id="msCinemaLightboxPortal">
+        <button class="ms-lightbox-close-trigger" id="msLightboxCloseAction" type="button">&times;</button>
+        <div class="ms-lightbox-window">
+            <video id="msLightboxTargetPlayer" controls width="100%" height="100%" src=""></video>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- SMOOTH COMPACT SINGLE-WORD TYPING ENGINE ---
+            const focusWords = ["Build", "Grow", "Launch", "Scale", "Optimise"];
+            const nodeTarget = document.getElementById('msHeroTypewriterNode');
+            let arrayIndex = 0;
+            let currentStringLength = nodeTarget.textContent.length;
+            let logicPhase = 'deleting';
+
+            function executionTypingLoop() {
+                const globalStringValue = focusWords[arrayIndex];
+
+                if (logicPhase === 'typing') {
+                    nodeTarget.textContent = globalStringValue.substring(0, currentStringLength + 1);
+                    currentStringLength++;
+
+                    if (currentStringLength === globalStringValue.length) {
+                        logicPhase = 'deleting';
+                        setTimeout(executionTypingLoop, 2000); 
+                    } else {
+                        setTimeout(executionTypingLoop, 100);
+                    }
+                } else if (logicPhase === 'deleting') {
+                    nodeTarget.textContent = globalStringValue.substring(0, currentStringLength - 1);
+                    currentStringLength--;
+
+                    if (currentStringLength === 0) {
+                        logicPhase = 'typing';
+                        arrayIndex = (arrayIndex + 1) % focusWords.length;
+                        setTimeout(executionTypingLoop, 400); 
+                    } else {
+                        setTimeout(executionTypingLoop, 60);
+                    }
+                }
+            }
+            setTimeout(executionTypingLoop, 2000);
+
+            // --- REFINED CTA CLICK TO COPY ENGINE ---
+            const emailTriggerNode = document.getElementById('msPanelEmailAction');
+            const toastNotification = document.getElementById('msClipboardToast');
+
+            emailTriggerNode.addEventListener('click', () => {
+                navigator.clipboard.writeText('hello@messold.com').then(() => {
+                    toastNotification.style.opacity = '1';
+                    setTimeout(() => {
+                        toastNotification.style.opacity = '0';
+                    }, 1800);
+                });
+            });
+
+            // --- COMPLEX DATA OBJECT FIELDS MAP ---
+            const formFieldsSchema = {
+                webDev: [
+                    { id: 'wdPlatform', label: 'Platform Matrix *', placeholder: 'Shopify Custom, Plus, Headless, etc.', type: 'text', required: true },
+                    { id: 'wdProducts', label: 'SKU Count / Products Volume *', placeholder: 'e.g., 150 items', type: 'text', required: true },
+                    { id: 'wdIntegrations', label: 'Critical ERP / CRM Integrations *', placeholder: 'e.g., SAP, NetSuite, Klaviyo', type: 'text', required: true },
+                    { id: 'wdTimeline', label: 'Desired Launch Timeline *', placeholder: 'e.g., 8-12 weeks', type: 'text', required: true },
+                    { id: 'wdBudget', label: 'Allocated Architecture Budget *', placeholder: 'e.g., $25k - $50k', type: 'text', required: true },
+                    { id: 'wdGoals', label: 'Core Technical Objective *', placeholder: 'e.g., Reduce latency, Custom checkout logic', type: 'text', required: true }
+                ],
+                perfMarketing: [
+                    { id: 'pmSpend', label: 'Current Monthly Ad Spend *', placeholder: 'e.g., $15,000 / month', type: 'text', required: true },
+                    { id: 'pmROAS', label: 'Current Base ROAS Metric *', placeholder: 'e.g., 2.1x', type: 'text', required: true },
+                    { id: 'pmCountries', label: 'Target Market Regions *', placeholder: 'e.g., US, UK, Canada', type: 'text', required: true },
+                    { id: 'pmGoals', label: 'Scale Objective *', placeholder: 'e.g., 3x spend while preserving efficiency', type: 'text', required: true },
+                    { id: 'pmChallenge', label: 'Primary Attribution Bottleneck *', placeholder: 'e.g., Data leakage post-iOS14', type: 'text', required: true }
+                ],
+                socialMedia: [
+                    { id: 'smPlatforms', label: 'Target Content Channels *', placeholder: 'e.g., Instagram, TikTok, YouTube Shorts', type: 'text', required: true },
+                    { id: 'smFrequency', label: 'Weekly Posting Frequency Objective *', placeholder: 'e.g., 5 posts per week per channel', type: 'text', required: true },
+                    { id: 'smContent', label: 'Asset Production Requirements *', placeholder: 'e.g., Raw UGC edits, Premium 3D motions', type: 'text', required: true },
+                    { id: 'smBudget', label: 'Monthly Creative Allocation *', placeholder: 'e.g., $5,000 / month', type: 'text', required: true }
+                ],
+                growthPartner: [
+                    { id: 'gpObjective', label: 'Primary Scale Objective *', placeholder: 'e.g., Complete digital transition and global expansion', type: 'text', required: true },
+                    { id: 'gpTimeline', label: 'Integration Horizon *', placeholder: 'Immediate next quarter alignment', type: 'text', required: true }
+                ]
+            };
+
+            // --- INTERACTIVE SELECTOR ENGINE ---
+            const pipelineDrawer = document.getElementById('msDynamicInjectionNode');
+            const interiorGridNode = document.getElementById('msDynamicInteriorGrid');
+            const selectionButtons = document.querySelectorAll('#msSegmentSelectionRack .ms-segment-btn');
+            let activeServiceKeySelected = "";
+
+            selectionButtons.forEach(buttonElement => {
+                buttonElement.addEventListener('click', () => {
+                    selectionButtons.forEach(btn => btn.classList.remove('active-state'));
+                    buttonElement.classList.add('active-state');
+                    
+                    const targetedKey = buttonElement.getAttribute('data-service-key');
+                    activeServiceKeySelected = targetedKey;
+                    
+                    renderDynamicFields(targetedKey);
+                });
+            });
+
+            function renderDynamicFields(key) {
+                interiorGridNode.innerHTML = "";
+                const schemaArray = formFieldsSchema[key];
+
+                if (!schemaArray) {
+                    pipelineDrawer.classList.remove('active-visible');
+                    return;
+                }
+
+                schemaArray.forEach(field => {
+                    const structuralWrapper = document.createElement('div');
+                    structuralWrapper.className = 'ms-interactive-input-group';
+                    if (field.id === 'wdGoals' || field.id === 'pmChallenge' || field.id === 'gpObjective') {
+                        structuralWrapper.className += ' ms-form-span-full';
+                    }
+
+                    structuralWrapper.innerHTML = `
+                        <input type="${field.type}" id="${field.id}" ${field.required ? 'required' : ''} placeholder="${field.placeholder}">
+                        <label for="${field.id}">${field.label}</label>
+                    `;
+                    
+                    interiorGridNode.appendChild(structuralWrapper);
+                });
+
+                pipelineDrawer.classList.add('active-visible');
+                
+                const freshInputs = interiorGridNode.querySelectorAll('input');
+                freshInputs.forEach(input => {
+                    input.addEventListener('input', () => {
+                        if(input.value.trim() !== "") {
+                            input.setAttribute('value', input.value);
+                        } else {
+                            input.removeAttribute('value');
+                        }
+                    });
+                });
+            }
+
+            // --- MANUAL CAROUSEL TRACK PIPELINE ENGINE ---
+            const customViewportTrack = document.getElementById('msCarouselMovingPipeline');
+            const buttonMoveLeft = document.getElementById('msCarouselTriggerLeft');
+            const buttonMoveRight = document.getElementById('msCarouselTriggerRight');
+            let alignmentPointer = 0;
+
+            function calculateCeilingLimit() {
+                if (window.innerWidth <= 768) return 3;
+                if (window.innerWidth <= 1024) return 2;
+                return 1;
+            }
+
+            function processTrackShift() {
+                const maximumPointer = calculateCeilingLimit();
+                if (alignmentPointer > maximumPointer) alignmentPointer = maximumPointer;
+
+                let translationPercentageValue = 0;
+                if (window.innerWidth > 1024) {
+                    translationPercentageValue = alignmentPointer * (100 / 3);
+                } else if (window.innerWidth > 768) {
+                    translationPercentageValue = alignmentPointer * (100 / 2);
+                } else {
+                    translationPercentageValue = alignmentPointer * 100;
+                }
+                customViewportTrack.style.transform = `translate3d(-${translationPercentageValue}%, 0, 0)`;
+            }
+
+            buttonMoveLeft.addEventListener('click', () => {
+                alignmentPointer = alignmentPointer > 0 ? alignmentPointer - 1 : calculateCeilingLimit();
+                processTrackShift();
+            });
+
+            buttonMoveRight.addEventListener('click', () => {
+                alignmentPointer = alignmentPointer < calculateCeilingLimit() ? alignmentPointer + 1 : 0;
+                processTrackShift();
+            });
+
+            window.addEventListener('resize', processTrackShift);
+
+            // --- THEATRE LIGHTBOX INTERACTION ENGINE ---
+            const mediaModalFrame = document.getElementById('msCinemaLightboxPortal');
+            const targetVideoObject = document.getElementById('msLightboxTargetPlayer');
+            const terminateTriggerAction = document.getElementById('msLightboxCloseAction');
+
+            document.querySelectorAll('[data-video-uri]').forEach(videoCardNode => {
+                videoCardNode.addEventListener('click', () => {
+                    const explicitSourceLink = videoCardNode.getAttribute('data-video-uri');
+                    if (explicitSourceLink) {
+                        targetVideoObject.src = explicitSourceLink;
+                        mediaModalFrame.classList.add('lightbox-visible');
+                        targetVideoObject.play();
+                    }
+                });
+            });
+
+            function clearActiveLightboxSession() {
+                mediaModalFrame.classList.remove('lightbox-visible');
+                targetVideoObject.pause();
+                targetVideoObject.src = "";
+            }
+
+            terminateTriggerAction.addEventListener('click', clearActiveLightboxSession);
+            mediaModalFrame.addEventListener('click', (event) => {
+                if (event.target === mediaModalFrame) clearActiveLightboxSession();
+            });
+
+            // --- ACCORDION MECHANICS ---
+            document.querySelectorAll('.ms-faq-row-trigger').forEach(triggerNode => {
+                triggerNode.addEventListener('click', () => {
+                    const rowNodeParent = triggerNode.parentElement;
+                    const drawerElement = rowNodeParent.querySelector('.ms-faq-content-drawer');
+                    const isActive = rowNodeParent.classList.contains('expanded-active');
+
+                    document.querySelectorAll('.ms-faq-row-node').forEach(nodeItem => {
+                        nodeItem.classList.remove('expanded-active');
+                        nodeItem.querySelector('.ms-faq-content-drawer').style.maxHeight = '0';
+                        nodeItem.querySelector('.ms-faq-content-drawer').style.opacity = '0';
+                    });
+
+                    if (!isActive) {
+                        rowNodeParent.classList.add('expanded-active');
+                        drawerElement.style.maxHeight = drawerElement.scrollHeight + 'px';
+                        drawerElement.style.opacity = '1';
+                    }
+                });
+            });
+
+            // --- HUD THEME ADAPTATION SCROLL OBSERVER ---
+            const trackingLightSections = document.querySelectorAll('.ms-section-spacing-light, .ms-cta-refined-section');
+            
+            const layoutObserver = new IntersectionObserver((intersectedEntries) => {
+                intersectedEntries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.body.classList.add('light-nav-mode');
+                    } else {
+                        let activeLightBlockExists = false;
+                        trackingLightSections.forEach(section => {
+                            const positionalBox = section.getBoundingClientRect();
+                            if (positionalBox.top < 70 && positionalBox.bottom > 0) {
+                                activeLightBlockExists = true;
+                            }
+                        });
+                        if (!activeLightBlockExists) {
+                            document.body.classList.remove('light-nav-mode');
+                        }
+                    }
+                });
+            }, { threshold: 0, rootMargin: "-70px 0px 0px 0px" });
+
+            trackingLightSections.forEach(sectionBlock => layoutObserver.observe(sectionBlock));
+
+            // --- SECURE DISPATCH COMPLIANCE ENGINE ---
+            const structuralFormElement = document.getElementById('msBespokeInteractionForm');
+            const submitCTAButtonText = document.getElementById('msSubmitButtonText');
+
+            const fixedInputsArray = structuralFormElement.querySelectorAll('.ms-form-grid-matrix input');
+            fixedInputsArray.forEach(input => {
+                input.addEventListener('input', () => {
+                    if (input.value.trim() !== "") {
+                        input.setAttribute('value', input.value);
+                    } else {
+                        input.removeAttribute('value');
+                    }
+                });
+            });
+
+            structuralFormElement.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const requiredElementsList = structuralFormElement.querySelectorAll('input[required]');
+                let verificationSuccessFlag = true;
+
+                requiredElementsList.forEach(inputNode => {
+                    if (!inputNode.value.trim()) {
+                        verificationSuccessFlag = false;
+                        inputNode.style.borderColor = '#EF4444';
+                        
+                        inputNode.addEventListener('input', function recoveryClear() {
+                            inputNode.style.borderColor = '';
+                            inputNode.removeEventListener('input', recoveryClear);
+                        });
+                    }
+                });
+
+                if (activeServiceKeySelected === "") {
+                    verificationSuccessFlag = false;
+                    alert('Please select a Core Growth Mandate from the option matrix grid.');
+                    return;
+                }
+
+                if (verificationSuccessFlag) {
+                    submitCTAButtonText.innerText = "Processing Parameters...";
+                    submitCTAButtonText.disabled = true;
+
+                    setTimeout(() => {
+                        alert('System Response: Data pipeline secure. Discovery call scheduling logged successfully.');
+                        structuralFormElement.reset();
+                        
+                        structuralFormElement.querySelectorAll('input').forEach(element => element.removeAttribute('value'));
+                        
+                        selectionButtons.forEach(btn => btn.classList.remove('active-state'));
+                        pipelineDrawer.classList.remove('active-visible');
+                        activeServiceKeySelected = "";
+                        
+                        submitCTAButtonText.innerText = "Book Discovery Call";
+                        submitCTAButtonText.disabled = false;
+                    }, 1400);
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
